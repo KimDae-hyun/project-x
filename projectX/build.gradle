@@ -1,0 +1,48 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.12-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+}
+
+group = 'com.web'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	/* Spring */
+	implementation 'org.springframework.boot:spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	/* Web */
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+	implementation "javax.servlet:jstl"
+
+	/* DB */
+	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	/* Validation */
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	/* Test */
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
